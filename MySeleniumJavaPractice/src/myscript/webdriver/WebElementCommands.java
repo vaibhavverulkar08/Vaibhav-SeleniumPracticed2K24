@@ -11,36 +11,43 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 // Selenium WebDriver - WebElement Commands
 //Test Automation Scenario : Verify valid user Gmail SigIn page.
 // Automated By Vaibhav Verulkar
-
 public class WebElementCommands {
 
 	WebDriver driver;
 	String url = "https://www.google.com/";
-	String userEmail = "";
+	String userEmail = "user1@gmail.com";
 	// String xpathSigninbtn = //*[@id="gb"]/div/div[2]/a/span
 	// xpath Nextbtn = //*[@id="identifierNext"]/div/button/span
 
 	public static void main(String[] args) throws Exception {
 		WebElementCommands ts = new WebElementCommands();
 		// Steps:
+		System.out.println("---------------------------------------------");
 		ts.launchBrowser();
 		System.out.println("Browser Launched");
 		ts.openURL();
 		System.out.println("URl Opened");
+		Thread.sleep(4000);
 
 		ts.clickOnSignInBtn();
 		System.out.println("SignIn Button Clicked");
+		Thread.sleep(4000);
 
 		ts.enterEmail();
 		System.out.println("Email Entered");
+		Thread.sleep(4000);
 
 		ts.clickNext();
 		System.out.println("Clicked on NEXT");
+		Thread.sleep(4000);
 
 		System.out.println("---Printing Message on Console:---");
 		ts.getScreenMessage();
+		Thread.sleep(4000);
 
-		System.out.println("");
+		System.out.println("Browser Closed");
+		ts.tearDown();
+		System.out.println("---------------------------------------------");
 
 	}
 
@@ -67,6 +74,8 @@ public class WebElementCommands {
 
 	public void clickOnSignInBtn() {
 		WebElement sigInbtn = driver.findElement(By.xpath("//*[@id=\"gb\"]/div/div[2]/a/span"));
+		HighlightElement.highlightElement(driver, sigInbtn);
+		
 		sigInbtn.click();
 	}
 
@@ -77,6 +86,8 @@ public class WebElementCommands {
 
 		// OR
 		WebElement emailInputField = driver.findElement(By.id("identifierId"));
+		HighlightElement.highlightElement(driver, emailInputField);
+		
 		boolean status = emailInputField.isEnabled();
 		// Check that if the Text field is enabled, if yes enter value
 		System.out.println(status);
@@ -87,8 +98,10 @@ public class WebElementCommands {
 
 	private void clickNext() throws Exception {
 		WebElement btnNext = driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/div/button/span"));
+		HighlightElement.highlightElement(driver, btnNext);
+
 		btnNext.click();
-		Thread.sleep(5000);
+		Thread.sleep(4000);
 		//getpageDetails();
 	}
 	
@@ -96,7 +109,7 @@ public class WebElementCommands {
 		//WebElement fetchText = driver.findElement(By.xpath("//*[@id='yDmH0d']/c-wiz/div/div[2]"));
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 		WebElement fetchText=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='yDmH0d']/c-wiz/div/div[2]")));
-		
+		HighlightElement.highlightElement(driver, fetchText);
 		String message =fetchText.getText();
 		System.out.println("The Message is on Screen: "+message);
 	}
